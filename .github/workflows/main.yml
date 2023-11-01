@@ -1,0 +1,48 @@
+# Test 2023-11-01 at 05:03:12
+
+name: Test
+
+on:
+  push
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: 'main'
+
+    - uses: actions/checkout@v3
+      with:
+        repository: philiprbrenan/DataTableText
+        path: dtt
+
+    - uses: actions/checkout@v3
+      with:
+        repository: philiprbrenan/SvgSimple
+        path: svg
+
+    - uses: actions/checkout@v3
+      with:
+        repository: philiprbrenan/SiliconChip
+        path: sc
+
+    - name: Install Tree
+      run:
+        sudo apt install tree
+
+    - name: Tree
+      run:
+        tree
+
+    - name: Cpan
+      run:  sudo cpan install -T Data::Dump
+    - name: Ubuntu update
+      run:  sudo apt update
+
+    - name: Silicon Chip Btree
+      run:
+        perl -Idtt/lib -Isvg/lib -Isc/lib  lib/Silicon/Chip/Btree.pm
