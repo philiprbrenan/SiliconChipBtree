@@ -39,35 +39,35 @@ Create a new B-Tree node
 
 **Example:**
 
-    if (1)                                                                          
+    if (1)
      {my $B = 3;
       my $N = 3;
       my $c = Silicon::Chip::newChip;
-    
+
          $c->inputBits ("find",     $B);                                            # Input into B-Tree node
          $c->inputWords("keys", $N, $B);
          $c->inputWords("data", $N, $B);
          $c->inputWords("next", $N, $B);
          $c->inputBits ("top",      $B);
-    
-    
+
+
          $c->newBtreeNode(qw(out find keys data next top), $N, $B);                 # B-Tree node  # 𝗘𝘅𝗮𝗺𝗽𝗹𝗲
 
-    
+
          $c->output    ("found",     "out.found");                                  # Results returned from B-Tree node
          $c->outputBits("dataFound", "out.dataFound", $B);
          $c->outputBits("nextLink",  "out.nextLink",  $B);
-    
+
       my sub test($)                                                                # Find keys in a node
        {my ($find) = @_;
-    
+
         my %f = setBits ("find", $B,     $find);
         my %t = setBits ("top",  $B,     $N+1);
         my %k = setWords("keys", $N, $B, 1..$N);
         my %d = setWords("data", $N, $B, 1..$N);
         my %n = setWords("next", $N, $B, 1..$N);
         my $s = $c->simulate({%f, %k, %d, %n, %t}, svg=>"svg/btreeNode_${N}_$B");
-    
+
         is_deeply($s->steps,                          9);
         is_deeply($s->values->{found},                1);
         is_deeply($s->bitsToInteger("dataFound", $B), $find);
@@ -75,7 +75,6 @@ Create a new B-Tree node
        }
       test($_) for 1..$N;
      }
-    
 
 # Index
 
