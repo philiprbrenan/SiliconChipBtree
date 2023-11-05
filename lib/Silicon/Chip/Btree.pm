@@ -126,22 +126,26 @@ B<Example:>
        $c->outputBits("nextLink",  "out.nextLink",  $B);
 
     my sub test($)                                                                # Find keys in a node
-     {my ($find) = @_;
+     {my ($f) = @_;
 
-      my %f = setBits ("find", $B,     $find);
+      my %f = setBits ("find", $B,     $f);
       my %t = setBits ("top",  $B,     $N+1);
       my %k = setWords("keys", $N, $B, 1..$N);
       my %d = setWords("data", $N, $B, 1..$N);
       my %n = setWords("next", $N, $B, 1..$N);
-      my $s = $c->simulate({%f, %k, %d, %n, %t}, svg=>"svg/btreeNode_${N}_$B");
+      my $s = $c->simulate({%f, %k, %d, %n, %t},
+        $f == 2 ? (svg=>q(svg/btreeNode)) : ());
 
-      is_deeply($s->steps,                          9);
-      is_deeply($s->values->{found},                1);
-      is_deeply($s->bitsToInteger("dataFound", $B), $find);
-      is_deeply($s->bitsToInteger("nextLink",  $B), $find+1);
+      is_deeply($s->steps, 9);
+      is_deeply($s->values->{found}, $f >= 1 && $f <= $N ? 1 : 0);
+      is_deeply($s->bitsToInteger("dataFound", $B), $f <= $N ? $f : 0);
+      is_deeply($s->bitsToInteger("nextLink",  $B), $f <= $N ? $f+1 : $N+1);
      }
-    test($_) for 1..$N;
+    test($_) for 0..$N+1;
    }
+
+
+=for html <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/svg/btreeNode.svg">
 
 
 
@@ -181,6 +185,8 @@ eval "use Test::More qw(no_plan);";
 eval "Test::More->builder->output('/dev/null');" if -e q(/home/phil2/);
 eval {goto latest};
 
+#svg https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/
+
 #latest:;
 if (1)                                                                          #TnewBtreeNode
  {my $B = 3;
@@ -207,9 +213,10 @@ if (1)                                                                          
     my %k = setWords("keys", $N, $B, 1..$N);
     my %d = setWords("data", $N, $B, 1..$N);
     my %n = setWords("next", $N, $B, 1..$N);
-    my $s = $c->simulate({%f, %k, %d, %n, %t}, $f == 2 ? (svg=>"svg/btreeNode_${N}_$B") : ());
+    my $s = $c->simulate({%f, %k, %d, %n, %t},
+      $f == 2 ? (svg=>q(svg/btreeNode)) : ());
 
-    is_deeply($s->steps,                          9);
+    is_deeply($s->steps, 9);
     is_deeply($s->values->{found}, $f >= 1 && $f <= $N ? 1 : 0);
     is_deeply($s->bitsToInteger("dataFound", $B), $f <= $N ? $f : 0);
     is_deeply($s->bitsToInteger("nextLink",  $B), $f <= $N ? $f+1 : $N+1);
