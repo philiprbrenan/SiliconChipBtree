@@ -19,11 +19,11 @@ module.  For an alphabetic listing of all methods by name see [Index](#index).
 
 # Btree Node
 
-A node in a B-Tree containing keys, data and links to other nodes. The node is activated when its preset id appears on the enable bus.
+A node in a B-Tree containing keys, data and links to other nodes. Nodes only produce output when their preset id is present on their enable bus.  This makes it possible for one node to select another node for further processing of the key being sought.
 
 ## newBtreeNode($chip, $id, $enable, $output, $find, $keys, $data, $next, $top, $N, $B, %options)
 
-Create a new B-Tree node
+Create a new B-Tree node. The node is activated only when its preset id appears on its enable bus otherwise it produces zeroes regardless of its inputs.
 
         Parameter  Description
      1  $chip      Chip
@@ -126,7 +126,7 @@ Create a new B-Tree node
 
 # Index
 
-1 [newBtreeNode](#newbtreenode) - Create a new B-Tree node
+1 [newBtreeNode](#newbtreenode) - Create a new B-Tree node.
 
 # Installation
 
