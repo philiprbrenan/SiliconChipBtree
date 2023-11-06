@@ -15,9 +15,9 @@ use Silicon::Chip     qw(:all);
 
 makeDieConfess;
 
-#D1 Btree Node                                                                  # A node in a B-Tree containing keys, data and links to other nodes. The node is activated when its preset id appears on the enable bus.
+#D1 Btree Node                                                                  # A node in a B-Tree containing keys, data and links to other nodes. Nodes only produce output when their preset id is present on their enable bus.  This makes it possible for one node to select another node for further processing of the key being sought.
 
-sub newBtreeNode($$$$$$$$$$$%)                                                  # Create a new B-Tree node
+sub newBtreeNode($$$$$$$$$$$%)                                                  # Create a new B-Tree node. The node is activated only when its preset id appears on its enable bus otherwise it produces zeroes regardless of its inputs.
  {my ($chip, $id, $enable, $output, $find, $keys, $data, $next, $top, $N, $B, %options) = @_; # Chip, numeric id of this node, enable bus, output name, key to find, keys to search, data corresponding to keys, next links, top next link, maximum number of keys in a node, size of key in bits, options
   @_ >= 11 or confess "Eleven or more parameters";
 
@@ -92,11 +92,11 @@ module.  For an alphabetic listing of all methods by name see L<Index|/Index>.
 
 =head1 Btree Node
 
-A node in a B-Tree containing keys, data and links to other nodes. The node is activated when its preset id appears on the enable bus.
+A node in a B-Tree containing keys, data and links to other nodes. Nodes only produce output when their preset id is present on their enable bus.  This makes it possible for one node to select another node for further processing of the key being sought.
 
 =head2 newBtreeNode($chip, $id, $enable, $output, $find, $keys, $data, $next, $top, $N, $B, %options)
 
-Create a new B-Tree node
+Create a new B-Tree node. The node is activated only when its preset id appears on its enable bus otherwise it produces zeroes regardless of its inputs.
 
       Parameter  Description
    1  $chip      Chip
@@ -201,7 +201,7 @@ B<Example:>
 =head1 Index
 
 
-1 L<newBtreeNode|/newBtreeNode> - Create a new B-Tree node
+1 L<newBtreeNode|/newBtreeNode> - Create a new B-Tree node.
 
 =head1 Installation
 
