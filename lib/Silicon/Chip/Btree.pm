@@ -47,13 +47,13 @@ END
     $C->compareGt(n(mm, $i), n($keys, $i), $find, $B, %options);                # Compare more  monotone mask
    }
 
-  $C->chooseWordUnderMask(df, $data, pe,    @B, %options);                      # Choose data under equals mask
-  $C->orBits             (f,         pe,    $B, %options);                      # Show whether key was found
+  $C->chooseWordUnderMask(df, $data, pe,          @B, %options);                # Choose data under equals mask
+  $C->orBits             (f,         pe,          $B, %options);                # Show whether key was found
 
-  $C->norBits            (nm, mm,           $N, %options);                      # True if the more monotone mask is all zero indicating that all of the keys in the node are less than or equal to the search key
-  $C->monotoneMaskToPointMask(pm, mm,       $N, %options);                      # Convert monotone more mask to point mask
-  $C->chooseWordUnderMask(mf, $next, pm,    @B, %options);                      # Choose next link using point mask from the more montone mask created
-  $C->chooseFromTwoWords (nf, mf, $top, nm, $B, %options);                      # Show whether key was found
+  $C->norBits            (nm, mm,                 $N, %options);                # True if the more monotone mask is all zero indicating that all of the keys in the node are less than or equal to the search key
+  $C->monotoneMaskToPointMask(pm, mm,             $N, %options);                # Convert monotone more mask to point mask
+  $C->chooseWordUnderMask(mf, $next, pm,          @B, %options);                # Choose next link using point mask from the more montone mask created
+  $C->chooseFromTwoWords (nf, mf, $top, nm,       $B, %options);                # Show whether key was found
 
   $C
  }
@@ -214,7 +214,7 @@ if (1)                                                                          
     my %d = setWords("data", $N, $B, 1..$N);
     my %n = setWords("next", $N, $B, 1..$N);
     my $s = $c->simulate({%f, %k, %d, %n, %t},
-      $f == 2 ? (svg=>q(svg/btreeNode)) : ());
+                          $f == 2 ? (svg=>q(svg/btreeNode)) : ());
 
     is_deeply($s->steps, 9);
     is_deeply($s->values->{found}, $f >= 1 && $f <= $N ? 1 : 0);
@@ -222,6 +222,24 @@ if (1)                                                                          
     is_deeply($s->bitsToInteger("nextLink",  $B), $f <= $N ? $f+1 : $N+1);
    }
   test($_) for 0..$N+1;
+
+  my sub test2($)                                                               # Find and not find keys in a node
+   {my ($f) = @_;
+
+    my %f = setBits ("find", $B,     $f);
+    my %t = setBits ("top",  $B,   2*$N+1);
+    my %k = setWords("keys", $N, $B, map {2*$_}   1..$N);
+    my %d = setWords("data", $N, $B,              1..$N);
+    my %n = setWords("next", $N, $B, map {2*$_-1} 1..$N);
+    my $s = $c->simulate({%f, %k, %d, %n, %t},
+      $f == 2 ? (svg=>q(svg/btreeNode)) : ());
+
+    is_deeply($s->steps, 9);
+    is_deeply($s->values->{found},                $f == 0 || $f % 2 ? 0 : 1);
+    is_deeply($s->bitsToInteger("dataFound", $B), $f % 2 ? 0 : $f / 2);
+    is_deeply($s->bitsToInteger("nextLink",  $B), $f + ($f % 2 ? 0 : 1)) if $f <= 2*$N ;
+   }
+  test2($_) for 0..2*$N+1;
  }
 
 done_testing();
