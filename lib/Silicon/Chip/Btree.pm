@@ -271,7 +271,7 @@ eval {goto latest};
 #svg https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/
 
 #latest:;
-if (1)                                                                          #TnewBtreeNode
+if (1)                                                                          #TnewBtreeNodeCompare
  {my $B = 3; my $N = 3; my $id = 5;
 
   my $c = Silicon::Chip::newChip;
