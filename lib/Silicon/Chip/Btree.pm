@@ -4,7 +4,7 @@
 # Philip R Brenan at appaapps dot com, Appa Apps Ltd Inc., 2023
 #-------------------------------------------------------------------------------
 use v5.34;
-package Silicon::Chip;
+package Silicon::Chip::Btree;
 our $VERSION = 20231111;                                                        # Version
 use warnings FATAL => qw(all);
 use strict;
@@ -99,7 +99,7 @@ sub newBtreeNode($$$$%)                                                         
   $c->inputBits (n($_), $B)     for @b;                                         # Input bits
   $c->inputWords(n($_), $N, $B) for @w;                                         # Input words
 
-  $c->newBtreeNodeCompare($id,                                                  # B-Tree node
+  &newBtreeNodeCompare($c, $id,                                                 # B-Tree node
     "$output.$id", (map {n($_)} qw(enable find keys data next top)), $N, $B);
 
   genHash("Silicon::Chip::Btree::Node",                                         # Node in B-Tree
@@ -328,7 +328,7 @@ if (1)                                                                          
      $c->inputWords("next", $N, $B);                                            # Next node associated with each key
      $c->inputBits ("top",      $B);                                            # Top next node
 
-     $c->newBtreeNodeCompare($id, qw(out enable find keys data next top),$N,$B);# B-Tree node
+    &newBtreeNodeCompare($c, $id, qw(out enable find keys data next top),$N,$B);# B-Tree node
 
   my sub test($)                                                                # Find keys in a node
    {my ($f) = @_;
@@ -393,7 +393,7 @@ if (1)                                                                          
  {my $B = 3; my $N = 3;
 
   my $c = Silicon::Chip::newChip;
-  my @n = map {$c->newBtreeNode("n", $N, $B)} 1..3;                             # B-Tree node
+  my @n = map {newBtreeNode($c, "n", $N, $B)} 1..3;                             # B-Tree node
 
   my %e = map {setBits ($c, $_->enable,     1)             } @n;
   my %f = map {setBits ($c, $_->find,       2)             } @n;
