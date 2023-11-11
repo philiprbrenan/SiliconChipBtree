@@ -349,7 +349,7 @@ if (1)                                                                          
  }
 
 #latest:;
-if (1)                                                                          #TnewBtreeNodeCompare
+if (1)                                                                          #TnewBtreeNode
  {my $B = 3; my $N = 3;
 
   my $c = Silicon::Chip::newChip;
