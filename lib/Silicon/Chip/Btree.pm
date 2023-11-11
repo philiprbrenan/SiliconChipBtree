@@ -63,6 +63,7 @@ END
   $C->chooseFromTwoWords (nF, mf, $top, nm, %options);                          # Show whether key was found
 
   $C->enableWord(df, dF, en,                %options);                          # Enable data found
+
   $C->and       ( f, [F, en]);                                                  # Enable found flag
   $C->enableWord(nf, nF, en,                %options);                          # Enable next link
   $C
@@ -77,7 +78,7 @@ sub newBtreeNode($$$$%)                                                         
   my @b = qw(enable find top);
   my @w = qw(keys data next);
   my @B = qw(found);
-  my @W = qw(dataFound nextlink);
+  my @W = qw(dataFound nextLink);
 
   my $id = ++$BtreeNodeIds;                                                     # Node number used to identify the node
   my sub n($)
@@ -89,13 +90,13 @@ sub newBtreeNode($$$$%)                                                         
   $c->inputWords(n($_), $N, $B) for @w;                                         # Input words
 
   $c->newBtreeNodeCompare($id,                                                  # B-Tree node
-    n(''), (map {n($_)} qw(enable find keys data next top)), $N, $B);
+    "$output.$id", (map {n($_)} qw(enable find keys data next top)), $N, $B);
 
-  $c->output    ($_, n($_)) for @B;                                             # Bit result
-  $c->outputBits($_, n($_)) for @W;                                             # Word result
+  #$c->output    ($_, n($_)) for @B;                                             # Bit result
+  #$c->outputBits($_, n($_)) for @W;                                             # Word result
 
   genHash("Silicon::Chip::Btree::Node",                                         # Node in btree
-    map {($_=>n($_))} @b, @w, @B, @W,
+   (map {($_=>n($_))} @b, @w, @B, @W),
     chip => $chip,
     id   => $id,
   )
@@ -318,7 +319,7 @@ if (1)                                                                          
     my %d = setWords($c, "data",                1..$N);
     my %n = setWords($c, "next",   map {2*$_-1} 1..$N);
     my $i = {%e, %f, %k, %d, %n, %t};
-    my $s = $c->simulate($i, $f == 2 ? (svg=>q(svg/btreeNode)) : ());
+    my $s = $c->simulate($i);
 
     is_deeply($s->steps, 11);
     is_deeply($s->value('found'),             $f == 0 || $f % 2 ? 0 : 1);
@@ -330,14 +331,14 @@ if (1)                                                                          
   my sub test3($)                                                               # Not enabled so only ever outputs 0
    {my ($f) = @_;
 
-    my %e = setBits ($c, "enable",     $id+1);
+    my %e = setBits ($c, "enable",     0);                                      # Disable
     my %f = setBits ($c, "find",       $f);
     my %t = setBits ($c, "top",      2*$N+1);
     my %k = setWords($c, "keys",   map {2*$_}   1..$N);
     my %d = setWords($c, "data",                1..$N);
     my %n = setWords($c, "next",   map {2*$_-1} 1..$N);
     my $i = {%e, %f, %k, %d, %n, %t};
-    my $s = $c->simulate($i, $f == 2 ? (svg=>q(svg/btreeNode)) : ());
+    my $s = $c->simulate($i);
 
     is_deeply($s->steps, 11);
     is_deeply($s->value("found"),             0);
@@ -345,6 +346,30 @@ if (1)                                                                          
     is_deeply($s->bitsToInteger("nextLink"),  0);
    }
   test3($_) for 0..2*$N+1;
+ }
+
+#latest:;
+if (1)                                                                          #TnewBtreeNodeCompare
+ {my $B = 3; my $N = 3;
+
+  my $c = Silicon::Chip::newChip;
+  my $n = $c->newBtreeNode(q(out), $N, $B);                                     # B-Tree node
+
+  $c->output    ("found",     $n->found);                                       # Results returned from B-Tree node
+  $c->outputBits("dataFound", $n->dataFound);
+  $c->outputBits("nextLink",  $n->nextLink);
+
+  my %e = setBits ($c, $n->enable,     1);
+  my %f = setBits ($c, $n->find,       2);
+  my %t = setBits ($c, $n->top,      2*$N+1);
+  my %k = setWords($c, $n->keys,   map {2*$_}   1..$N);
+  my %d = setWords($c, $n->data,                1..$N);
+  my %n = setWords($c, $n->next,   map {2*$_-1} 1..$N);
+  my $i = {%e, %f, %k, %d, %n, %t};
+  my $s = $c->simulate($i, svg=>q(svg/btreeNode));
+  is_deeply($s->values->{found},            1);
+  is_deeply($s->bitsToInteger("dataFound"), 1);
+  is_deeply($s->bitsToInteger("nextLink"),  3);
  }
 
 done_testing();
