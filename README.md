@@ -12,12 +12,12 @@ Silicon::Chip::Btree - Implement a B-Tree as a silicon chip.
 
 Implement a B-Tree as a silicon chip.
 
-Version 20231101.
+Version 20231112.
 
 The following sections describe the methods in each functional area of this
 module.  For an alphabetic listing of all methods by name see [Index](#index).
 
-# Btree Node
+# B-Tree Node
 
 A node in a B-Tree containing keys, data and links to other nodes. Nodes only produce output when their preset id is present on their enable bus.  This makes it possible for one node to select another node for further processing of the key being sought.
 
@@ -54,7 +54,7 @@ Create a new B-Tree node. The node is activated only when its preset id appears 
          $c->inputBits ("top",      $B);                                            # Top next node
 
 
-         $c->newBtreeNodeCompare($id, qw(out enable find keys data next top),$N,$B);# B-Tree node  # 𝗘𝘅𝗮𝗺𝗽𝗹𝗲
+        &newBtreeNodeCompare($c, $id, qw(out enable find keys data next top),$N,$B);# B-Tree node  # 𝗘𝘅𝗮𝗺𝗽𝗹𝗲
 
 
       my sub test($)                                                                # Find keys in a node
@@ -71,8 +71,8 @@ Create a new B-Tree node. The node is activated only when its preset id appears 
 
         is_deeply($s->steps, 11);
         is_deeply($s->value("out.found"),     $f >= 1 && $f <= $N ? 1 : 0);
-        is_deeply($s->bint ("out.dataFound"), $f <= $N ? $f : 0);
-        is_deeply($s->bint ("out.nextLink"),  $f <= $N ? $f+1 : $N+1);
+        is_deeply($s->bInt ("out.dataFound"), $f <= $N ? $f : 0);
+        is_deeply($s->bInt ("out.nextLink"),  $f <= $N ? $f+1 : $N+1);
        }
       test($_) for 0..$N+1;
 
@@ -90,8 +90,8 @@ Create a new B-Tree node. The node is activated only when its preset id appears 
 
         is_deeply($s->steps, 11);
         is_deeply($s->value('out.found'),     $f == 0 || $f % 2 ? 0 : 1);
-        is_deeply($s->bint ("out.dataFound"), $f % 2 ? 0 : $f / 2);
-        is_deeply($s->bint ("out.nextLink"),  $f + ($f % 2 ? 0 : 1)) if $f <= 2*$N ;
+        is_deeply($s->bInt ("out.dataFound"), $f % 2 ? 0 : $f / 2);
+        is_deeply($s->bInt ("out.nextLink"),  $f + ($f % 2 ? 0 : 1)) if $f <= 2*$N ;
        }
       test2($_) for 0..2*$N+1;
 
@@ -109,8 +109,8 @@ Create a new B-Tree node. The node is activated only when its preset id appears 
 
         is_deeply($s->steps, 11);
         is_deeply($s->value("out.found"),     0);
-        is_deeply($s->bint ("out.dataFound"), 0);
-        is_deeply($s->bint ("out.nextLink"),  0);
+        is_deeply($s->bInt ("out.dataFound"), 0);
+        is_deeply($s->bInt ("out.nextLink"),  0);
        }
       test3($_) for 0..2*$N+1;
      }
@@ -137,7 +137,7 @@ Create a new B-Tree node. The node is activated only when its preset id appears 
 
       my $c = Silicon::Chip::newChip;
 
-      my @n = map {$c->newBtreeNode("n", $N, $B)} 1..3;                             # B-Tree node  # 𝗘𝘅𝗮𝗺𝗽𝗹𝗲
+      my @n = map {newBtreeNode($c, "n", $N, $B)} 1..3;                             # B-Tree node  # 𝗘𝘅𝗮𝗺𝗽𝗹𝗲
 
 
       my %e = map {setBits ($c, $_->enable,     1)             } @n;
@@ -150,8 +150,8 @@ Create a new B-Tree node. The node is activated only when its preset id appears 
 
       my $s = $c->simulate($i, svg=>q(svg/btreeNode));
       is_deeply($s->value($n[0]->found),             1);
-      is_deeply($s->bint ($n[0]->dataFound), 1);
-      is_deeply($s->bint ($n[0]->nextLink),  3);
+      is_deeply($s->bInt ($n[0]->dataFound), 1);
+      is_deeply($s->bInt ($n[0]->nextLink),  3);
      }
 
 # Index
@@ -165,7 +165,7 @@ Create a new B-Tree node. The node is activated only when its preset id appears 
 This module is written in 100% Pure Perl and, thus, it is easy to read,
 comprehend, use, modify and install via **cpan**:
 
-    sudo cpan install Silicon::Chip
+    sudo cpan install Silicon::Chip::Btree
 
 # Author
 
