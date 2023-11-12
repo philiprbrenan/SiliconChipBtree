@@ -69,7 +69,7 @@ Create a new B-Tree node. The node is activated only when its preset id appears 
         my $i = {%e, %f, %k, %d, %n, %t};
         my $s = $c->simulate($i, $f == 2 ? (svg=>q(svg/btreeNode)) : ());
     
-        is_deeply($s->steps, 11);
+        is_deeply($s->steps, 10);
         is_deeply($s->value("out.found"),     $f >= 1 && $f <= $N ? 1 : 0);
         is_deeply($s->bInt ("out.dataFound"), $f <= $N ? $f : 0);
         is_deeply($s->bInt ("out.nextLink"),  $f <= $N ? $f+1 : $N+1);
@@ -88,7 +88,7 @@ Create a new B-Tree node. The node is activated only when its preset id appears 
         my $i = {%e, %f, %k, %d, %n, %t};
         my $s = $c->simulate($i);
     
-        is_deeply($s->steps, 11);
+        is_deeply($s->steps, 10);
         is_deeply($s->value('out.found'),     $f == 0 || $f % 2 ? 0 : 1);
         is_deeply($s->bInt ("out.dataFound"), $f % 2 ? 0 : $f / 2);
         is_deeply($s->bInt ("out.nextLink"),  $f + ($f % 2 ? 0 : 1)) if $f <= 2*$N ;
@@ -107,7 +107,7 @@ Create a new B-Tree node. The node is activated only when its preset id appears 
         my $i = {%e, %f, %k, %d, %n, %t};
         my $s = $c->simulate($i);
     
-        is_deeply($s->steps, 11);
+        is_deeply($s->steps, 10);
         is_deeply($s->value("out.found"),     0);
         is_deeply($s->bInt ("out.dataFound"), 0);
         is_deeply($s->bInt ("out.nextLink"),  0);
@@ -183,8 +183,6 @@ Create a new B-Tree of a specified name
       my $t = newBtree($c, "tree", "find", K, L, B);  # 𝗘𝘅𝗮𝗺𝗽𝗹𝗲
 
     
-      c->printSvg(svg=>q(svg/tree));                                                # Mask for Btree
-    
       my %i = $c->setBits("find", 2);                                               # Key to find
       if (1)                                                                        # Root node
        {my $n = $t->nodes->{1}{1};
@@ -209,18 +207,17 @@ Create a new B-Tree of a specified name
         %i = (%i, $c->setWords($n->keys, 22, 24, 26));
         %i = (%i, $c->setWords($n->data, 22, 42, 62));
        }
+    
       if (1)
        {my $n = $t->nodes->{2}{4};
         %i = (%i, $c->setWords($n->keys, 33, 35, 37));
         %i = (%i, $c->setWords($n->data, 33, 53, 73));
        }
     
-      if (my $s = $c->simulate({%i}))                                               # Find a known key
-       {is_deeply($s->steps,          19);                                          # Steps
+      if (my $s = $c->simulate({%i}, svg=>q(svg/tree)))                             # Find a known key
+       {is_deeply($s->steps,          16);                                          # Steps
         is_deeply($s->bInt($t->data), 22);                                          # Data associated with found key
        }
-      #lll "AAAA
-  ", dump($s);
      }
     
 
