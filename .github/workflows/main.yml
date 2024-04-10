@@ -1,0 +1,80 @@
+# Test 2024-04-10 at 22:36:30
+# wire3c in play when going to a new level, wires drawn from longest to shortest.
+
+name: Test
+
+on:
+  push:
+    paths:
+      - '**/main.yml'
+
+jobs:
+
+  test:
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: 'main'
+
+    - uses: actions/checkout@v3
+      with:
+        repository: philiprbrenan/DataTableText
+        path: dtt
+
+    - uses: actions/checkout@v3
+      with:
+        repository: philiprbrenan/SvgSimple
+        path: svg
+
+    - uses: actions/checkout@v3
+      with:
+        repository: philiprbrenan/SiliconChip
+        path: sc
+
+    - uses: actions/checkout@v3
+      with:
+        repository: philiprbrenan/SiliconChipLayout
+        path: layout
+
+    - uses: actions/checkout@v3
+      with:
+        repository: philiprbrenan/SiliconChipWiring
+        path: wiring
+
+    - uses: actions/checkout@v3
+      with:
+        repository: philiprbrenan/MathIntersectionCircleLine
+        path: micl
+
+    - uses: actions/checkout@v3
+      with:
+        repository: philiprbrenan/GithubCrud
+        path: gh
+
+    - name: Install Cairo svg
+      run:
+        sudo apt install cairosvg
+
+    - name: Cpan
+      run:  sudo cpan install -T Data::Dump  GDS2 Digest::SHA1
+
+    - name: Silicon Chip Btree
+      run:
+        perl -Idtt/lib -Isvg/lib -Isc/lib -Ilayout/lib -Iwiring/lib -Imicl/lib  lib/Silicon/Chip/Btree.pm
+
+    - name: Upload images
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        perl -Idtt/lib -Igh/lib -M"Data::Table::Text" -e"Data::Table::Text::postProcessImagesForDocumentation(log=>1)"
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: BTree
+        path: |
+          gds
+          png
+          svg
