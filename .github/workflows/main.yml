@@ -1,4 +1,4 @@
-# Test 2024-04-11 at 00:43:25
+# Test 2024-04-11 at 02:47:48
 # wire3c in play when going to a new level, wires drawn from longest to shortest.
 
 name: Test
@@ -70,6 +70,14 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         perl -Idtt/lib -Igh/lib -M"Data::Table::Text" -e"Data::Table::Text::postProcessImagesForDocumentation(log=>1)"
+
+    - name: S3 images
+      run: |
+        pip install awscli
+        aws configure set default.region us-east-2
+        aws configure set aws_access_key_id     ${{ secrets.AWS_ACCESS_KEY_ID     }}
+        aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws s3 sync . s3://vanina-andrea/SiliconChipBtree/
 
     - uses: actions/upload-artifact@v4
       with:
