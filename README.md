@@ -125,11 +125,11 @@ Create a new B-Tree node. The node is activated only when its preset id appears 
     
 
 <div>
-    <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/png/btreeNode.png">
+    <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/btreeNode.png">
 </div>
 
 <div>
-    <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/png/btreeNode_1.png">
+    <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/btreeNode_1.png">
 </div>
 
 ## newBtreeNode($chip, $output, $find, $K, $B, %options)
@@ -249,51 +249,51 @@ Create a new B-Tree of a specified name
     
 
 <div>
-    <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/svg/tree.svg">
+    <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/svg/tree.svg">
 </div>
 
 <div>
-    <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/png/tree.png">
+    <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree.png">
 </div>
 
 <div>
-    <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/png/tree_1.png">
+    <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_1.png">
 </div>
 
 <div>
-    <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/png/tree_2.png">
+    <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_2.png">
 </div>
 
 <div>
-    <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/png/tree_3.png">
+    <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_3.png">
 </div>
 
 <div>
-    <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/png/tree_4.png">
+    <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_4.png">
 </div>
 
 <div>
-    <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/png/tree_5.png">
+    <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_5.png">
 </div>
 
 <div>
-    <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/png/tree_6.png">
+    <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_6.png">
 </div>
 
 <div>
-    <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/png/tree_7.png">
+    <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_7.png">
 </div>
 
 <div>
-    <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/png/tree_8.png">
+    <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_8.png">
 </div>
 
 <div>
-    <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/png/tree_9.png">
+    <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_9.png">
 </div>
 
 <div>
-    <img src="https://raw.githubusercontent.com/philiprbrenan/SiliconChipBtree/main/lib/Silicon/Chip/png/tree_10.png">
+    <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_10.png">
 </div>
 
 # Hash Definitions
