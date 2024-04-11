@@ -427,18 +427,19 @@ B<Example:>
   # Find the value 22 corresponding to key 2
   
   # if (my $s = $c->simulate({%i}, svg=>q(tree), spaceDx=>2, spaceDy=>2, newChange=>1,  borderDx=>4, borderDy=>4))  # Fails in 6 hours
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), svgs=>12, gsx=>1, gsy=>1, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 90 minutes
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>10, gsx=>2, gsy=>1, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 3h15
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>9,  gsx=>1, gsy=>2, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 2h18
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>7,  gsx=>1, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 3h40
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>7,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 3h40
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>6,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>4, log=>1, placeFirst=>1))  # 30 minutes
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>4))  # 1h46
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>6))  # 2h43
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>20, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>4))  # 1h52
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>8))  #
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>8, spaceDy=>4))  #
-    if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>8, spaceDy=>8))  #
+  # if (my $s = $c->simulate({%i}, svg=>q(tree), svg =>12, gsx=>1, gsy=>1, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 90 minutes
+  # if (my $s = $c->simulate({%i}, svg=>q(tree), png =>10, gsx=>2, gsy=>1, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 3h15
+  # if (my $s = $c->simulate({%i}, svg=>q(tree), png =>9,  gsx=>1, gsy=>2, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 2h18
+  # if (my $s = $c->simulate({%i}, svg=>q(tree), png =>7,  gsx=>1, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 3h40
+  # if (my $s = $c->simulate({%i}, svg=>q(tree), png =>7,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 3h40
+  # if (my $s = $c->simulate({%i}, svg=>q(tree), png =>6,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>4, log=>1, placeFirst=>1))  # 30 minutes
+  # if (my $s = $c->simulate({%i}, svg=>q(tree), png =>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>4))  # 1h46
+  # if (my $s = $c->simulate({%i}, svg=>q(tree), png =>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>6))  # 2h43
+  # if (my $s = $c->simulate({%i}, svg=>q(tree), png =>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>20, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>4))  # 1h52
+  # if (my $s = $c->simulate({%i}, svg=>q(tree), png =>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>8))  #
+  # if (my $s = $c->simulate({%i}, svg=>q(tree), png =>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>8, spaceDy=>4))  #
+  # if (my $s = $c->simulate({%i}, svg=>q(tree), png =>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>8, spaceDy=>8))  # 3h48
+    if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>4))  #
      {is_deeply($s->steps,                      46);                              # Steps
       is_deeply($s->bInt($t->data),             22);                              # Data associated with search key 2
       ok($s->checkLevelsMatch);
@@ -463,24 +464,6 @@ B<Example:>
   
 
 =for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_4.png">
-  
-
-=for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_5.png">
-  
-
-=for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_6.png">
-  
-
-=for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_7.png">
-  
-
-=for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_8.png">
-  
-
-=for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_9.png">
-  
-
-=for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_10.png">
   
 
 
@@ -700,18 +683,19 @@ if (1)                                                                          
 # Find the value 22 corresponding to key 2
 
 # if (my $s = $c->simulate({%i}, svg=>q(tree), spaceDx=>2, spaceDy=>2, newChange=>1,  borderDx=>4, borderDy=>4))  # Fails in 6 hours
-# if (my $s = $c->simulate({%i}, svg=>q(tree), svgs=>12, gsx=>1, gsy=>1, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 90 minutes
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>10, gsx=>2, gsy=>1, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 3h15
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>9,  gsx=>1, gsy=>2, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 2h18
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>7,  gsx=>1, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 3h40
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>7,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 3h40
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>6,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>4, log=>1, placeFirst=>1))  # 30 minutes
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>4))  # 1h46
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>6))  # 2h43
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>20, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>4))  # 1h52
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>8))  #
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>8, spaceDy=>4))  #
-  if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>8, spaceDy=>8))  #
+# if (my $s = $c->simulate({%i}, svg=>q(tree), svg =>12, gsx=>1, gsy=>1, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 90 minutes
+# if (my $s = $c->simulate({%i}, svg=>q(tree), png =>10, gsx=>2, gsy=>1, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 3h15
+# if (my $s = $c->simulate({%i}, svg=>q(tree), png =>9,  gsx=>1, gsy=>2, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 2h18
+# if (my $s = $c->simulate({%i}, svg=>q(tree), png =>7,  gsx=>1, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 3h40
+# if (my $s = $c->simulate({%i}, svg=>q(tree), png =>7,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 3h40
+# if (my $s = $c->simulate({%i}, svg=>q(tree), png =>6,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>4, log=>1, placeFirst=>1))  # 30 minutes
+# if (my $s = $c->simulate({%i}, svg=>q(tree), png =>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>4))  # 1h46
+# if (my $s = $c->simulate({%i}, svg=>q(tree), png =>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>6))  # 2h43
+# if (my $s = $c->simulate({%i}, svg=>q(tree), png =>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>20, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>4))  # 1h52
+# if (my $s = $c->simulate({%i}, svg=>q(tree), png =>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>8))  #
+# if (my $s = $c->simulate({%i}, svg=>q(tree), png =>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>8, spaceDy=>4))  #
+# if (my $s = $c->simulate({%i}, svg=>q(tree), png =>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>12, log=>1, placeFirst=>1, spaceDx=>8, spaceDy=>8))  # 3h48
+  if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>1, gsy=>5, newChange=>1,  borderDx=>4, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>4))  #
    {is_deeply($s->steps,                      46);                              # Steps
     is_deeply($s->bInt($t->data),             22);                              # Data associated with search key 2
     ok($s->checkLevelsMatch);
