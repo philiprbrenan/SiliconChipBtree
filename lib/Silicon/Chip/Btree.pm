@@ -749,16 +749,17 @@ if (1)                                                                          
 # if (my $s = $c->simulate({%i}, id=>"2024-04-14.26", pngs=>4, gsx=>4, gsy=>4, newChange=>1,  borderDx=>10, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
 # if (my $s = $c->simulate({%i}, id=>"2024-04-14.25", pngs=>4, gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>32, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
 # if (my $s = $c->simulate({%i}, id=>"2024-04-14.31", pngs=>4, gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
-# if (my $s = $c->simulate({%i}, id=>"2024-04-14.32", pngs=>3, gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>40, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
-# if (my $s = $c->simulate({%i}, id=>"2024-04-14.33", pngs=>3, gsx=>3, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
-# if (my $s = $c->simulate({%i}, id=>"2024-04-14.34", pngs=>3, gsx=>4, gsy=>3, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
-# if (my $s = $c->simulate({%i}, id=>"2024-04-14.35", pngs=>3, gsx=>3, gsy=>3, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
+# if (my $s = $c->simulate({%i}, id=>"2024-04-14.32", pngs=>4, gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>40, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
+# if (my $s = $c->simulate({%i}, id=>"2024-04-14.33", pngs=>4, gsx=>3, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
+# if (my $s = $c->simulate({%i}, id=>"2024-04-14.34", pngs=>4, gsx=>4, gsy=>3, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
+# if (my $s = $c->simulate({%i}, id=>"2024-04-14.35", pngs=>4, gsx=>3, gsy=>3, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
+# if (my $s = $c->simulate({%i}, id=>"2024-04-14.37", pngs=>4, gsx=>3, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
+# if (my $s = $c->simulate({%i}, id=>"2024-04-14.38", pngs=>4, gsx=>2, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
+# if (my $s = $c->simulate({%i}, id=>"2024-04-14.39", pngs=>4, gsx=>1, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
+# if (my $s = $c->simulate({%i}, id=>"2024-04-14.40", pngs=>4, gsx=>2, gsy=>1, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
+# if (my $s = $c->simulate({%i}, id=>"2024-04-14.41", pngs=>4, gsx=>1, gsy=>1, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
 # if (my $s = $c->simulate({%i}, id=>"2024-04-14.36", pngs=>3, gsx=>2, gsy=>3, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
-# if (my $s = $c->simulate({%i}, id=>"2024-04-14.37", pngs=>3, gsx=>3, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
-# if (my $s = $c->simulate({%i}, id=>"2024-04-14.38", pngs=>3, gsx=>2, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
-# if (my $s = $c->simulate({%i}, id=>"2024-04-14.39", pngs=>3, gsx=>1, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
-# if (my $s = $c->simulate({%i}, id=>"2024-04-14.40", pngs=>3, gsx=>2, gsy=>1, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
-  if (my $s = $c->simulate({%i}, id=>"2024-04-14.41", pngs=>3, gsx=>1, gsy=>1, newChange=>1,  borderDx=>16, borderDy=>48, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
+  if (my $s = $c->simulate({%i}, id=>"2024-04-14.42", pngs=>3, gsx=>2, gsy=>3, newChange=>1,  borderDx=>16, borderDy=>44, log=>1, placeFirst=>1, spaceDx=>9, spaceDy=>14, svg=>q(tree)))  #
    {is_deeply($s->steps,                      46);                              # Steps
     is_deeply($s->bInt($t->data),             22);                              # Data associated with search key 2
     ok($s->checkLevelsMatch);
