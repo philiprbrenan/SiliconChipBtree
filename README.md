@@ -245,7 +245,8 @@ Create a new B-Tree of a specified name
     # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>32, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>4))  # 1m55 Java
     # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>32, log=>1, placeFirst=>1, spaceDx=>8, spaceDy=>8))  # 3m21
     # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>32, log=>1, placeFirst=>1, spaceDx=>20, spaceDy=>8)) #
-      if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>20, spaceDy=>20)) #
+    # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>20, spaceDy=>20)) # 21m
+      if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>100, log=>1, placeFirst=>1, spaceDx=>20, spaceDy=>20)) #
        {is_deeply($s->steps,                      46);                              # Steps
         is_deeply($s->bInt($t->data),             22);                              # Data associated with search key 2
         ok($s->checkLevelsMatch);
