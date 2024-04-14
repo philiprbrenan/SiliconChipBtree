@@ -1,9 +1,9 @@
-# Test 2024-04-14 at 22:18:34
+# Test 2024-04-14 at 22:19:13
 # wire3c in play when going to a new level, wires drawn from longest to shortest.
 
 name: Btree
 
-run-name: id=> 2024-04-14.25   pngs=>3  gsx=>4  gsy=>4  newChange=>1   borderDx=>16  borderDy=>32  log=>1  placeFirst=>1  spaceDx=>9  spaceDy=>14  svg=>q tree   
+run-name: id=> 2024-04-14.31   pngs=>3  gsx=>4  gsy=>4  newChange=>1   borderDx=>16  borderDy=>48  log=>1  placeFirst=>1  spaceDx=>9  spaceDy=>14  svg=>q tree   
 
 on:
   push:
@@ -63,7 +63,7 @@ jobs:
     - name: Cpan
       run:  sudo cpan install -T Data::Dump  GDS2 Digest::SHA1
 
-    - name: Silicon Chip Btree id=> 2024-04-14.25   pngs=>3  gsx=>4  gsy=>4  newChange=>1   borderDx=>16  borderDy=>32  log=>1  placeFirst=>1  spaceDx=>9  spaceDy=>14  svg=>q tree   
+    - name: Silicon Chip Btree id=> 2024-04-14.31   pngs=>3  gsx=>4  gsy=>4  newChange=>1   borderDx=>16  borderDy=>48  log=>1  placeFirst=>1  spaceDx=>9  spaceDy=>14  svg=>q tree   
       run:
         perl -Idtt/lib -Isvg/lib -Isc/lib -Ilayout/lib -Iwiring/lib -Imicl/lib  lib/Silicon/Chip/Btree.pm
 
