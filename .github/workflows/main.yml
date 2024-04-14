@@ -1,7 +1,7 @@
-# Test 2024-04-14 at 20:12:46
+# Test 2024-04-14 at 20:16:06
 # wire3c in play when going to a new level, wires drawn from longest to shortest.
 
-name: Test
+name: Btree , pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>2, spaceDy=>12, id=>"2024-04-14_8")) #
 
 on:
   push:
