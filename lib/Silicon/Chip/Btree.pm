@@ -720,7 +720,8 @@ if (1)                                                                          
 # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>20, id=>"2024-04-14_3")) #
 # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>16, id=>"2024-04-14_4")) #
 # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>14, id=>"2024-04-14_5")) #
-  if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>12, id=>"2024-04-14_6")) #
+# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>12, id=>"2024-04-14_6")) #
+  if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>4, spaceDy=>12, id=>"2024-04-14_7")) #
    {is_deeply($s->steps,                      46);                              # Steps
     is_deeply($s->bInt($t->data),             22);                              # Data associated with search key 2
     ok($s->checkLevelsMatch);
