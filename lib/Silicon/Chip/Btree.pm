@@ -248,25 +248,25 @@ Create a new B-Tree node. The node is activated only when its preset id appears 
 B<Example:>
 
 
-  if (1)                                                                          
+  if (1)
    {my $B = 3; my $N = 3; my $id = 5;
-  
+
     my $c = Silicon::Chip::newChip; my sub c {$c}
-  
+
        c->inputBits ("enable",   $B);                                             # Enable - the node only operates if this value matches its preset id
        c->inputBits ("find",     $B);                                             # Key to search for
        c->inputWords("keys", $N, $B);                                             # Keys to search
        c->inputWords("data", $N, $B);                                             # Data associated with each key
        c->inputWords("next", $N, $B);                                             # Next node associated with each key
        c->inputBits ("top",      $B);                                             # Top next node
-  
-  
+
+
       &newBtreeNodeCompare($c, $id, qw(out enable find keys data next top),$N,$B);# B-Tree node  # 𝗘𝘅𝗮𝗺𝗽𝗹𝗲
 
-  
+
     my sub test($)                                                                # Find keys in a node
      {my ($f) = @_;
-  
+
       my %e = $c->setBits ("enable",    $id);
       my %f = $c->setBits ("find",      $f);
       my %t = $c->setBits ("top",       $N+1);
@@ -275,17 +275,17 @@ B<Example:>
       my %n = $c->setWords("next",   1..$N);
       my $i = {%e, %f, %k, %d, %n, %t};
       my $s = $c->simulate($i, $f == 2 ? (svg=>q(btreeNode), pngs=>1) : ());
-  
+
       is_deeply($s->steps, 14);
       is_deeply($s->value("out.found"),     $f >= 1 && $f <= $N ? 1 : 0);
       is_deeply($s->bInt ("out.dataFound"), $f <= $N ? $f : 0);
       is_deeply($s->bInt ("out.nextLink"),  $f <= $N ? $f+1 : $N+1);
      }
     test($_) for 0..$N+1;
-  
+
     my sub test2($)                                                               # Find and not find keys in a node
      {my ($f) = @_;
-  
+
       my %e = setBits ($c, "enable",        $id);
       my %f = setBits ($c, "find",          $f);
       my %t = setBits ($c, "top",         2*$N+1);
@@ -294,17 +294,17 @@ B<Example:>
       my %n = setWords($c, "next",   map {2*$_-1} 1..$N);
       my $i = {%e, %f, %k, %d, %n, %t};
       my $s = $c->simulate($i);
-  
+
       is_deeply($s->steps, 14);
       is_deeply($s->value('out.found'),     $f == 0 || $f % 2 ? 0 : 1);
       is_deeply($s->bInt ("out.dataFound"), $f % 2 ? 0 : $f / 2);
       is_deeply($s->bInt ("out.nextLink"),  $f + ($f % 2 ? 0 : 1)) if $f <= 2*$N ;
      }
     test2($_) for 0..2*$N+1;
-  
+
     my sub test3($)                                                               # Not enabled so only ever outputs 0
      {my ($f) = @_;
-  
+
       my %e = setBits ($c, "enable",     0);                                      # Disable
       my %f = setBits ($c, "find",       $f);
       my %t = setBits ($c, "top",      2*$N+1);
@@ -313,7 +313,7 @@ B<Example:>
       my %n = setWords($c, "next",   map {2*$_-1} 1..$N);
       my $i = {%e, %f, %k, %d, %n, %t};
       my $s = $c->simulate($i);
-  
+
       is_deeply($s->steps, 14);
       is_deeply($s->value("out.found"),     0);
       is_deeply($s->bInt ("out.dataFound"), 0);
@@ -321,13 +321,13 @@ B<Example:>
      }
     test3($_) for 0..2*$N+1;
    }
-  
+
 
 =for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/btreeNode.png">
-  
+
 
 =for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/btreeNode_1.png">
-  
+
 
 =head2 newBtreeNode($chip, $output, $find, $K, $B, %options)
 
@@ -344,16 +344,16 @@ Create a new B-Tree node. The node is activated only when its preset id appears 
 B<Example:>
 
 
-  if (1)                                                                          
+  if (1)
    {my $B = 3; my $N = 3;
-  
+
     my $c = Silicon::Chip::newChip;
        $c->inputBits ("find",  $B);                                               # Key to find
-  
-  
+
+
     my @n = map {newBtreeNode($c, "n", "find", $N, $B)} 1..3;                     # B-Tree node  # 𝗘𝘅𝗮𝗺𝗽𝗹𝗲
 
-  
+
     my %e = map {setBits ($c, $_->enable,     1)             } @n;
     my %f = map {setBits ($c, $_->find,       2)             } @n;
     my %t = map {setBits ($c, $_->top,      2*$N+1)          } @n;
@@ -361,13 +361,13 @@ B<Example:>
     my %d = map {setWords($c, $_->data,                1..$N)} @n;
     my %n = map {setWords($c, $_->next,   map {2*$_-1} 1..$N)} @n;
     my $i = {%e, %f, %k, %d, %n, %t};
-  
+
     my $s = $c->simulate($i);
     is_deeply($s->value($n[0]->found),     1);
     is_deeply($s->bInt ($n[0]->dataFound), 1);
     is_deeply($s->bInt ($n[0]->nextLink),  3);
    }
-  
+
 
 =head2 newBtree($chip, $output, $find, $keys, $levels, $bits, %options)
 
@@ -385,15 +385,15 @@ Create a new B-Tree of a specified name
 B<Example:>
 
 
-  if (1)                                                                          
+  if (1)
    {my sub B{8}                                                                   # Maximum number of keys per node, levels in the tree, bits per key
-  
+
     my $c = Silicon::Chip::newChip(name=>"Btree-".B);
     $c->inputBits("find", B);
-  
+
     my $t = newBtree($c, "tree", "find", 3, 2, B);  # 𝗘𝘅𝗮𝗺𝗽𝗹𝗲
 
-  
+
     my %i = $c->setBits("find", 2);                                               # Key to find
     if (1)                                                                        # Root node
      {my $n = $t->nodes->{1}{1};
@@ -423,9 +423,9 @@ B<Example:>
       %i = (%i, $c->setWords($n->keys, 33, 35, 37));
       %i = (%i, $c->setWords($n->data, 33, 53, 73));
      }
-  
+
   # Find the value 22 corresponding to key 2
-  
+
   # if (my $s = $c->simulate({%i}, svg=>q(tree), spaceDx=>2, spaceDy=>2, newChange=>1,  borderDx=>4, borderDy=>4))  # Fails in 6 hours
   # if (my $s = $c->simulate({%i}, svg=>q(tree), svg =>12, gsx=>1, gsy=>1, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 90 minutes
   # if (my $s = $c->simulate({%i}, svg=>q(tree), png =>10, gsx=>2, gsy=>1, newChange=>1,  borderDx=>4, borderDy=>4, log=>1))  # 3h15
@@ -446,38 +446,32 @@ B<Example:>
   # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>32, log=>1, placeFirst=>1, spaceDx=>20, spaceDy=>8)) #
   # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>20, spaceDy=>20)) # 21m
   # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>100, log=>1, placeFirst=>1, spaceDx=>20, spaceDy=>20)) # 22m
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>20, spaceDy=>20)) #
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>10, spaceDy=>20)) #
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>10, spaceDy=>10)) #
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>2, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>10, spaceDy=>10)) #
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>2, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>10, spaceDy=>10)) #
-  # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>2, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>10)) #
-    if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>2, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>8)) #
+    if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>20, spaceDy=>20)) # 22m
      {is_deeply($s->steps,                      46);                              # Steps
       is_deeply($s->bInt($t->data),             22);                              # Data associated with search key 2
       ok($s->checkLevelsMatch);
   #   is_deeply($s->length,                 300531);
      }
    }
-  
+
 
 =for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/svg/tree.svg">
-  
+
 
 =for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree.png">
-  
+
 
 =for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_1.png">
-  
+
 
 =for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_2.png">
-  
+
 
 =for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_3.png">
-  
+
 
 =for html <img src="https://vanina-andrea.s3.us-east-2.amazonaws.com/SiliconChipBtree/lib/Silicon/Chip/png/tree_4.png">
-  
+
 
 
 =head1 Hash Definitions
@@ -715,13 +709,14 @@ if (1)                                                                          
 # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>32, log=>1, placeFirst=>1, spaceDx=>20, spaceDy=>8)) #
 # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>20, spaceDy=>20)) # 21m
 # if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>4, borderDy=>100, log=>1, placeFirst=>1, spaceDx=>20, spaceDy=>20)) # 22m
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>20, spaceDy=>20)) #
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>10, spaceDy=>20)) #
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>10, spaceDy=>10)) #
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>2, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>10, spaceDy=>10)) #
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>2, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>10, spaceDy=>10)) #
-# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>2, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>10)) #
-  if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>2, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>8)) #
+# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>20, spaceDy=>20)) # 22m
+# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>10, spaceDy=>10)) # 10m
+# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>2, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>10, spaceDy=>10)) # 8m
+# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>2, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>10, spaceDy=>10)) # 7m
+# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>2, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>10)) # 5m
+# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>4,  gsx=>2, gsy=>2, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>6, spaceDy=>8)) # 4m
+# if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>10, spaceDy=>20, id=>"2024-04-14_1")) # 14m
+  if (my $s = $c->simulate({%i}, svg=>q(tree), pngs=>3,  gsx=>4, gsy=>4, newChange=>1,  borderDx=>16, borderDy=>64, log=>1, placeFirst=>1, spaceDx=>8, spaceDy=>20, id=>"2024-04-14_2")) #
    {is_deeply($s->steps,                      46);                              # Steps
     is_deeply($s->bInt($t->data),             22);                              # Data associated with search key 2
     ok($s->checkLevelsMatch);
