@@ -3,7 +3,7 @@
 # Implement a B-Tree as a silicon chip.
 # Philip R Brenan at appaapps dot com, Appa Apps Ltd Inc., 2023
 #-------------------------------------------------------------------------------
-# Testing gsx=>2
+# Database on a chip: high speed low power database look ups save data center operators money on their electricity bills.
 use v5.34;
 package Silicon::Chip::Btree;
 our $VERSION = 20240331;                                                        # Version
