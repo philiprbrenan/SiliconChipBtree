@@ -169,7 +169,7 @@ sub newBtree($$$$$$%)                                                           
 
     if ($l > 1)                                                                 # Subsequent layers are enabled by previous layers
      {my $nl = n(L, $l-1);                                                      # Next link from previous layer
-      for my $n(1..N)                                                          # Each node at this level
+      for my $n(1..N)                                                           # Each node at this level
        {c->connectInputBits($n{$l}{$n}->enable, $nl);                           # Enable from previous layer
        }
      }
